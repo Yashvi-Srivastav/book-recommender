@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Recommender System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+   <!-- Header -->
+  <header>
+    <div class="navbar">
+      <h1>📚 Book Recommender</h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="#top-books">Top 50 Books</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+   <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Find Your Next Favorite Book</h2>
+      <p>Discover personalized book recommendations powered by AI.</p>
+      <form class="search-box" action="/recommend_books" method="post">
+        <input name="user_input" type="text" placeholder="Enter a book name..." />
+        <button type="submit">Recommend</button>
+      </form>
+
+      <button class="top-books-btn" onclick="scrollToTopBooks()">View Top 50 Books</button>
+    </div>
+  </section>
+  <!-- Top 50 Books Section -->
+   <div class ="container">
+       <div class ="row">
+           <div class="col-md-12">
+  <section id="top-books" class="top-books">
+    <h2>📖 Our Top 50 Books</h2>
+    <p>Explore the most loved and recommended books of all time.</p>
+    </div>
+
+     <!--  First 4 visible cards -->
+
+     {% for i in range(book_name|length)%}
+
+              <div class="col-md-3">
+      <div class="book-card">
+        <img src="{{ image[i]}}" alt="Harry Potter">
+        <h3>{{ book_name[i]}}</h3>
+        <p class="author">by {{ author[i]}}</p>
+        <div class="rating"><span>⭐ {{ "%.1f"|format(rating[i]) }}</span> <span>•</span> <span>{{ votes[i]}} votes</span></div>
+      </div>
+              </div>
+
+      {% endfor %}
+
+      </div>
+          </div>
+      <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About This Project</h2>
+    <p>
+      This Book Recommender System uses intelligent algorithms to suggest books you'll love.
+      Explore top-rated books and discover your next great read effortlessly.
+    </p>
+  </section>
+     <!-- Footer -->
+  <footer>
+    <p>© 2025 Book Recommender System | Built with ❤ by Yashvi</p>
+  </footer>
+
+  <!-- Smooth Scroll + Show All Functionality -->
+  <script>
+    function scrollToTopBooks() {
+      document.getElementById("top-books").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function showAllBooks() {
+      document.getElementById("allBooks").classList.remove("hidden");
+      document.getElementById("showMore").style.display = "none";
+    }
+  </script>
+
+
+
+</body>
+</html>
